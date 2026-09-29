@@ -45,7 +45,14 @@ test('build adatta i percorsi dei file del branch e non duplica il prefisso', ()
   assert(homepage.includes('href="/heppenstall-sito/style.css"'));
   assert(homepage.includes('href="/heppenstall-sito/steel-tongs/"'));
   assert(homepage.includes('src="/heppenstall-sito/assets/logo.png"'));
+  assert(homepage.includes('<svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true"'));
+  assert(!homepage.includes('↗') && !homepage.includes('↓'));
   assert(css.includes("url('/heppenstall-sito/assets/fonts/Barlow-Regular.ttf')"));
+  assert(css.includes('.icon-arrow'));
+  for (const {file} of entries) {
+    const page = fs.readFileSync(file, 'utf8');
+    assert(!page.includes('↗') && !page.includes('↓'), file);
+  }
 
   build();
   assert.equal(fs.readFileSync(homepagePath, 'utf8'), homepage);

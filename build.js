@@ -12,11 +12,18 @@ function addCssBasePath(css) {
   return css.replace(/(url\(\s*["']?)\/(?!\/|heppenstall-sito(?:\/|["']))/gi, `$1${basePath}/`);
 }
 
+function replaceArrowIcons(html) {
+  return html
+    .replaceAll('↗', '<svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg>')
+    .replaceAll('↓', '<svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14m-7-7 7 7 7-7"/></svg>');
+}
+
 function build() {
   // Valida tutte le pagine prima di aggiornare i file del branch di pubblicazione.
   const pages = entries.map(({file}) => {
     const original = fs.readFileSync(file, 'utf8');
-    return {file, html: addHtmlBasePath(renderPage(original, file))};
+    const rendered = addHtmlBasePath(renderPage(original, file));
+    return {file, html: replaceArrowIcons(rendered)};
   });
   const stylesheet = `${__dirname}/style.css`;
   const originalCss = fs.readFileSync(stylesheet, 'utf8');
