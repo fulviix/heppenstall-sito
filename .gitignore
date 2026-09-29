@@ -1,0 +1,38 @@
+﻿# Documentazione locale
+/LEGGIMI.md
+
+# Backup e anteprime locali
+/.backups/
+/.browser-review/
+/.photo-review/
+/.review-layout.cjs
+/.translate-*.cjs
+
+# Dipendenze e output generati
+/node_modules/
+/dist/
+/coverage/
+
+# Configurazioni locali e credenziali
+.env
+.env.*
+!.env.example
+/.vscode/
+/.idea/
+
+# File temporanei e di sistema
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Originali fotografici: il sito utilizza le versioni WebP
+/assets/tongs.png
+/assets/handling.png
+/assets/service.png
+/assets/researchanddevelopment.png
+/assets/whoweare.png
+/assets/handling.jpg
