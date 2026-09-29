@@ -3,11 +3,14 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const {entries, renderPage} = require('../components/layout.cjs');
+const {build} = require('../build.js');
 const root = path.resolve(__dirname, '..');
+const basePath = '/heppenstall-sito';
+const removeBasePath = html => html.replaceAll(`${basePath}/`, '/');
 
 for (const {page, lang, file} of entries) {
   test(`${page.key} / ${lang}: layout, lingua e contenuto`, () => {
-    const original = fs.readFileSync(file, 'utf8');
+    const original = removeBasePath(fs.readFileSync(file, 'utf8'));
     const result = renderPage(original, file);
     const main = html => html.match(/<main\b[\s\S]*?<\/main>/)[0];
     assert.equal(main(result), main(original));
@@ -30,3 +33,21 @@ for (const {page, lang, file} of entries) {
     assert(!result.includes('{{'));
   });
 }
+
+test('build adatta i percorsi dei file del branch e non duplica il prefisso', () => {
+  build();
+
+  const homepagePath = path.join(root, 'index.html');
+  const homepage = fs.readFileSync(homepagePath, 'utf8');
+  const cssPath = path.join(root, 'style.css');
+  const css = fs.readFileSync(cssPath, 'utf8');
+
+  assert(homepage.includes('href="/heppenstall-sito/style.css"'));
+  assert(homepage.includes('href="/heppenstall-sito/steel-tongs/"'));
+  assert(homepage.includes('src="/heppenstall-sito/assets/logo.png"'));
+  assert(css.includes("url('/heppenstall-sito/assets/fonts/Barlow-Regular.ttf')"));
+
+  build();
+  assert.equal(fs.readFileSync(homepagePath, 'utf8'), homepage);
+  assert.equal(fs.readFileSync(cssPath, 'utf8'), css);
+});

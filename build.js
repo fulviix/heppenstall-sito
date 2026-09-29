@@ -1,16 +1,41 @@
-// Rigenera i componenti condivisi negli HTML, pronti per hosting statico.
+// Rigenera i componenti condivisi e adatta i percorsi per GitHub Pages.
 const fs = require('node:fs');
 const {entries, renderPage} = require('./components/layout.cjs');
-let updated = 0;
-// Valida tutte le pagine prima di scrivere.
-const results = entries.map(({file}) => {
-  const original = fs.readFileSync(file, 'utf8');
-  return {file, original, rendered: renderPage(original, file)};
-});
-for (const {file, original, rendered} of results) {
-  if (original !== rendered) {
-    fs.writeFileSync(file, rendered);
-    updated++;
-  }
+
+const basePath = '/heppenstall-sito';
+
+function addHtmlBasePath(html) {
+  return html.replace(/(\b(?:href|src|action)\s*=\s*["'])\/(?!\/|heppenstall-sito(?:\/|["']))/gi, `$1${basePath}/`);
 }
-console.log(`Componenti aggiornati: ${updated} pagine su ${entries.length}.`);
+
+function addCssBasePath(css) {
+  return css.replace(/(url\(\s*["']?)\/(?!\/|heppenstall-sito(?:\/|["']))/gi, `$1${basePath}/`);
+}
+
+function build() {
+  // Valida tutte le pagine prima di aggiornare i file del branch di pubblicazione.
+  const pages = entries.map(({file}) => {
+    const original = fs.readFileSync(file, 'utf8');
+    return {file, html: addHtmlBasePath(renderPage(original, file))};
+  });
+  const stylesheet = `${__dirname}/style.css`;
+  const originalCss = fs.readFileSync(stylesheet, 'utf8');
+  const css = addCssBasePath(originalCss);
+
+  let updated = 0;
+  for (const {file, html} of pages) {
+    if (fs.readFileSync(file, 'utf8') !== html) {
+      fs.writeFileSync(file, html);
+      updated++;
+    }
+  }
+  if (originalCss !== css) {
+    fs.writeFileSync(stylesheet, css);
+  }
+
+  console.log(`GitHub Pages: aggiornate ${updated} pagine${originalCss !== css ? ' e style.css' : ''}.`);
+}
+
+if (require.main === module) build();
+
+module.exports = {build};

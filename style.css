@@ -1,48 +1,48 @@
 @font-face {
   font-family:'Barlow';
-  src:url('/assets/fonts/Barlow-Regular.ttf') format('truetype');
+  src:url('/heppenstall-sito/assets/fonts/Barlow-Regular.ttf') format('truetype');
   font-style:normal;
   font-weight:400;
   font-display:swap
 }
 @font-face {
   font-family:'Barlow';
-  src:url('/assets/fonts/Barlow-Medium.ttf') format('truetype');
+  src:url('/heppenstall-sito/assets/fonts/Barlow-Medium.ttf') format('truetype');
   font-style:normal;
   font-weight:500;
   font-display:swap
 }
 @font-face {
   font-family:'Barlow';
-  src:url('/assets/fonts/Barlow-SemiBold.ttf') format('truetype');
+  src:url('/heppenstall-sito/assets/fonts/Barlow-SemiBold.ttf') format('truetype');
   font-style:normal;
   font-weight:600;
   font-display:swap
 }
 @font-face {
   font-family:'Barlow';
-  src:url('/assets/fonts/Barlow-Bold.ttf') format('truetype');
+  src:url('/heppenstall-sito/assets/fonts/Barlow-Bold.ttf') format('truetype');
   font-style:normal;
   font-weight:700;
   font-display:swap
 }
 @font-face {
   font-family:'Barlow Condensed';
-  src:url('/assets/fonts/BarlowCondensed-Medium.ttf') format('truetype');
+  src:url('/heppenstall-sito/assets/fonts/BarlowCondensed-Medium.ttf') format('truetype');
   font-style:normal;
   font-weight:500;
   font-display:swap
 }
 @font-face {
   font-family:'Barlow Condensed';
-  src:url('/assets/fonts/BarlowCondensed-SemiBold.ttf') format('truetype');
+  src:url('/heppenstall-sito/assets/fonts/BarlowCondensed-SemiBold.ttf') format('truetype');
   font-style:normal;
   font-weight:600;
   font-display:swap
 }
 @font-face {
   font-family:'Barlow Condensed';
-  src:url('/assets/fonts/BarlowCondensed-Bold.ttf') format('truetype');
+  src:url('/heppenstall-sito/assets/fonts/BarlowCondensed-Bold.ttf') format('truetype');
   font-style:normal;
   font-weight:700;
   font-display:swap
@@ -284,7 +284,7 @@ h1 {
 }
 .hero-photo {
   position:relative;
-  background-image:linear-gradient(0deg,#101b1ef2 0%,transparent 55%),url('/assets/tongs.webp');
+  background-image:linear-gradient(0deg,#101b1ef2 0%,transparent 55%),url('/heppenstall-sito/assets/tongs.webp');
   background-position:center,center top;
   background-size:cover,cover;
   background-repeat:no-repeat;
@@ -379,15 +379,15 @@ h2 {
   transition:filter .3s
 }
 .tongs {
-  background-image:url('/assets/tongs.webp');
+  background-image:url('/heppenstall-sito/assets/tongs.webp');
   background-position:center 35%;
   background-size:cover
 }
 .handling {
-  background-image:url('/assets/handling.webp')
+  background-image:url('/heppenstall-sito/assets/handling.webp')
 }
 .service {
-  background-image:url('/assets/service.webp')
+  background-image:url('/heppenstall-sito/assets/service.webp')
 }
 .card-title {
   margin-top:22px;
