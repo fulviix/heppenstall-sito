@@ -13,9 +13,11 @@ function addCssBasePath(css) {
 }
 
 function replaceArrowIcons(html) {
+  const icon = '<svg class="icon-arrow" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em" viewBox="0 0 24 24" aria-hidden="true" focusable="false">';
   return html
-    .replaceAll('↗', '<svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg>')
-    .replaceAll('↓', '<svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14m-7-7 7 7 7-7"/></svg>');
+    .replaceAll('↗', `${icon}<path d="M7 17 17 7M8 7h9v9"/></svg>`)
+    .replaceAll('↓', `${icon}<path d="M12 5v14m-7-7 7 7 7-7"/></svg>`)
+    .replace(/<svg class="icon-arrow"[^>]*>/g, icon);
 }
 
 function build() {
