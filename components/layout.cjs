@@ -8,7 +8,7 @@ const pages = [
   { key: 'tongs', it: '/steel-tongs/', en: '/en/steel-tongs/' },
   { key: 'handling', it: '/handling-technology/', en: '/en/handling-technology/' },
   { key: 'service', it: '/service-revamping/', en: '/en/service-revamping/' },
-  { key: 'research', it: '/research-development/' },
+  { key: 'research', it: '/research-development/', en: '/en/research-development/' },
   { key: 'company', it: '/who-we-are/' },
   { key: 'contacts', it: '/contacts/' },
   { key: 'privacy', it: '/privacy-policy/', navigation: false }
