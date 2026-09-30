@@ -6,7 +6,7 @@ const root = path.resolve(__dirname, '..');
 const pages = [
   { key: 'home', it: '/', en: '/en/' },
   { key: 'tongs', it: '/steel-tongs/', en: '/en/steel-tongs/' },
-  { key: 'handling', it: '/handling-technology/' },
+  { key: 'handling', it: '/handling-technology/', en: '/en/handling-technology/' },
   { key: 'service', it: '/service-revamping/' },
   { key: 'research', it: '/research-development/' },
   { key: 'company', it: '/who-we-are/' },
