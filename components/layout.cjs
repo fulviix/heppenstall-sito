@@ -32,10 +32,11 @@ function renderPage(html, file) {
   if (!entry) return html;
   const {page, lang} = entry;
   const words = labels[lang];
+  const icons = path.relative(path.dirname(path.resolve(file)), path.join(root, 'assets/icons.svg')).split(path.sep).join('/');
   const home = pages[0][lang];
   const navigation = pages.filter(item => item.key !== 'home' && item.navigation !== false).map(item => {
     const contact = item.key === 'contacts';
-    return `<a${contact ? ' class="nav-contact"' : ''} href="${item[lang] || item.it}"${item.key === page.key ? ' aria-current="page"' : ''}>${escape(words[item.key])}${contact ? ' <span>↗</span>' : ''}</a>`;
+    return `<a${contact ? ' class="nav-contact"' : ''} href="${item[lang] || item.it}"${item.key === page.key ? ' aria-current="page"' : ''}>${escape(words[item.key])}${contact ? ' <span><svg class="icon-arrow" width="24" height="24" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#arrow-up-right"></use></svg></span>' : ''}</a>`;
   }).join('\n    ');
   const languages = ['it', 'en'].map(code => {
     const name = code === 'it' ? 'Italiano' : 'English';
@@ -49,7 +50,7 @@ function renderPage(html, file) {
   for (const [tag, content] of Object.entries(components)) {
     const pattern = new RegExp(`<${tag}\\b[^>]*>[\\s\\S]*?<\\/${tag}>`, 'g');
     if ([...html.matchAll(pattern)].length !== 1) throw new Error(`Expected one ${tag} in ${file}`);
-    html = html.replace(pattern, () => content);
+    html = html.replace(pattern, () => content.replaceAll('/assets/icons.svg', icons));
   }
   return html;
 }
